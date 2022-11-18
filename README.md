@@ -1,6 +1,6 @@
 # Service Mesh Demo
 
-This demo is a set of scripts that are based on the Travel Demo Tutorial from the [Kiali web-site](https://kiali.io/docs/tutorials/travels/01-prerequisites/).  You should read more about the [Travels Demo App](https://kiali.io/docs/tutorials/travels/02-install-travel-demo/#understanding-the-demo-application) in order to better show your demo. 
+This demo is make up of a set of scripts that are based on the Travel Demo Tutorial from the [Kiali web-site](https://kiali.io/docs/tutorials/travels/01-prerequisites/).  You should read more about the [Travels Demo App](https://kiali.io/docs/tutorials/travels/02-install-travel-demo/#understanding-the-demo-application) in order to better show your demo. 
 
 The general demo steps are explained below.  For those who are impatient and just want to show off OpenShift Service Mesh, run the following on any recent OpenShift 4 cluster, with system-admin privileges. 
 
