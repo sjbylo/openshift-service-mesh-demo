@@ -42,7 +42,7 @@ Alternatively you can log into Kiali and complete the following, manually:
 
 After several minutes you should see a similar graph in Kiali:
 
-=== add image ===
+![The Travel Demo App as shown in Kiali](./images/travels-demo-app-graph.png)
 
 ### Troubleshooting
 
@@ -52,7 +52,7 @@ Sometimes Kiali does not start and the route is missing:
 Waiting for route/kiali .....
 ```
 
-The only way I have found to fix this is to run the following, which re-installs the OSSM resource.
+The only way I have found to fix this is to re-install the Service Mesh Control Plane:
 
 ```
 ./93-delete-smcp-basic.sh 
@@ -61,7 +61,10 @@ Verifying deletion of all control-plane pods .... done
 ./02-install-smcp-basic.sh 
 ```
 
-If the graph of the demo app does not show up in Kilai, restart the application pods:
+
+If the demo app graph does not show properly in Kilai (as below), restart the application pods:
+
+![broken graph](./images/demo-app-not-showing.png){width=50%}
 
 ```
 oc delete po --all -n travel-portal
