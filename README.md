@@ -52,7 +52,7 @@ Sometimes Kiali does not start and the route is missing:
 Waiting for route/kiali .....
 ```
 
-The only way I have found to fix this is to re-install the Service Mesh Control Plane:
+The only way I could fix this is to re-install the Service Mesh Control Plane:
 
 ```
 ./93-delete-smcp-basic.sh 
@@ -64,7 +64,7 @@ Verifying deletion of all control-plane pods .... done
 
 If the demo app graph does not show properly in Kilai (as below), restart the application pods:
 
-![broken graph](./images/demo-app-not-showing.png){width=50%}
+![broken graph](./images/demo-app-not-showing.png)
 
 ```
 oc delete po --all -n travel-portal
