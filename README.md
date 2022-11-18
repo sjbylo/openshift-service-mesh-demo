@@ -15,8 +15,12 @@ To uninstall OSSM and the demo app:
 ./99-uninstall-all.sh
 ```
 
+Please see Troubleshooting below!
 
-## Alternative step-by-step Demo
+
+### Troubleshooting
+
+### Alternative step-by-step Demo
 
 Each of the scripts can be used one after the other, if needed.  The names of the scripts should be self-explanatory. 
 You might choose to show the whole demo from scratch, installing the Operators and the mesh control plane and then the application etc, you can choose what you show yourself and what you just want to automate (using one or more of the scripts). 
@@ -40,3 +44,19 @@ After several minutes you should see a similar graph in Kiali:
 
 === add image ===
 
+### Troubleshooting
+
+Sometimes Kiali does not start and the route is missing:
+
+```
+Waiting for route/kiali .....
+```
+
+The only way I have found to fix this is to run the following, which re-installs the OSSM resource.
+
+```
+./93-delete-smcp-basic.sh 
+servicemeshcontrolplane.maistra.io "basic" deleted
+Verifying deletion of all control-plane pods .... done
+./02-install-smcp-basic.sh 
+```
