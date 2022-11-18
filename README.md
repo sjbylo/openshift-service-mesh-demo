@@ -64,7 +64,9 @@ Verifying deletion of all control-plane pods .... done
 
 If the demo app graph does not show properly in Kilai (as below), restart the application pods:
 
-![broken graph](./images/demo-app-not-showing.png)
+<!-- ![broken graph](./images/demo-app-not-showing.png) -->
+
+<img src="./images/demo-app-not-showing.png" width="50%" />
 
 ```
 oc delete po --all -n travel-portal
