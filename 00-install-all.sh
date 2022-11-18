@@ -1,0 +1,25 @@
+#!/bin/bash 
+
+echo Executing the following commands:
+
+execscripts=./0[1-9]*sh
+execscripts="$execscripts ./10-install-travels-services-v2-and-v3.sh ./11-add-per-portal-routing-to-travels-v1-v2-v3.sh ./20-inject-delay-into-flight-svc.sh"
+
+ls -1 $execscripts
+echo -n "Continue (y/n) [y]:"
+read yn 
+[ "$yn" == "n" ] && exit 
+
+for s in $execscripts
+do
+	echo ==========================
+	echo $s
+	echo ==========================
+
+	eval $s
+	sleep 1
+done
+
+echo
+bin/check-app-working.sh
+

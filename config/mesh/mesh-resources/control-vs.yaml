@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: control
+  namespace: travel-control
+spec:
+  gateways:
+  - travel-control/control-gateway
+  hosts:
+#  - control.travel-control.CLUSTER_DOMAIN
+  - "*"
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: control.travel-control.svc.cluster.local
+        port:
+          number: 8080
