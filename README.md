@@ -17,9 +17,6 @@ To uninstall OSSM and the demo app:
 
 Please see Troubleshooting below!
 
-
-### Troubleshooting
-
 ### Alternative step-by-step Demo
 
 Each of the scripts can be used one after the other, if needed.  The names of the scripts should be self-explanatory. 
