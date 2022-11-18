@@ -27,10 +27,11 @@ K=`oc get route kiali -n istio-system -o json | jq -r ".spec.host"`
 if [ "$K" ]; then
 	# Show Kiali route 
 	echo
+	echo Note, it may take a few minutes for the demo app graph to show up in your browser.
 	echo "Kiali route:"
 	echo "https://$K/"
 	echo
-	echo Wait a few minuites and go directly to the demo graph with annimation settings turned on:
+	echo Wait a few minutes and go directly to the demo graph with animation settings turned on:
 	echo "https://$K/console/graph/namespaces/?traffic=grpc%2CgrpcRequest%2Chttp%2ChttpRequest%2Ctcp%2CtcpSent&graphType=versionedApp&namespaces=travel-agency%2Ctravel-control%2Ctravel-portal&duration=60&refresh=10000&layout=dagre&namespaceLayout=kiali-dagre&animation=true&injectServiceNodes=false&graphFind=rt+%3E+1000&edges=responseTime%2Crt95"
 
 fi

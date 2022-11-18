@@ -60,3 +60,10 @@ servicemeshcontrolplane.maistra.io "basic" deleted
 Verifying deletion of all control-plane pods .... done
 ./02-install-smcp-basic.sh 
 ```
+
+If the graph of the demo app does not show up in Kilai, restart the application pods:
+
+```
+oc delete po --all -n travel-portal
+oc delete po --all -n travel-agency
+```
