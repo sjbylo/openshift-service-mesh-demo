@@ -1,4 +1,5 @@
 #!/bin/bash 
+# Problem: this script will show the Kiali route below even if the app is not in the mesh (no GW, VS etc)
 
 APP_URL=`oc get route control -n travel-control -o json 2>/dev/null | jq -r .status.ingress[0].host`
 

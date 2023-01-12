@@ -8,11 +8,13 @@ oc apply -f config/mesh/basic-mesh
 echo This can take some time to complete.
 echo -n Verifying installation ...
 
-while ! oc get smcp basic -n istio-system | grep -qi ComponentsReady
-do
-	echo -n .
-	sleep 1
-done
+oc wait -n istio-system --for=condition=ready smcp basic --timeout=300s
+
+#while ! oc get smcp basic -n istio-system | grep -qi ComponentsReady
+#do
+#	echo -n .
+#	sleep 1
+#done
 echo " done"
 
 oc get smcp basic -n istio-system

@@ -8,8 +8,8 @@ spec:
     istio: ingressgateway
   servers:
   - hosts:
-    - control.travel-control.CLUSTER_DOMAIN
-#    - "*"
+    #- control.travel-control.CLUSTER_DOMAIN
+    - "*"   # OSSM will create the route automatically 
     port:
       name: http
       number: 80
