@@ -46,6 +46,7 @@ What does this graph show?
 - The three "clients" in the travel-portal namespace are being routed to specific versions of "travels" API (v1, v2, v3) for testing purposes. This allows you to deploy different versions of applications and route traffic so that there is no need to deploy the whole application for each "client" to test.  
 - The flights service in the travel-agency namespace is misbehaving (it's slow).  Traffic that is degraded due to this is highlighted in yellow (round trip > 1000ms).  This makes it easy to see where there are possible bottlenecks in the mesh.   You can also view past issues like this by clicking into the "replay" button in the top right of Kiali's graph. 
 
+To understand the full context of this demo, please see the Travel Demo Tutorial from the [Kiali web-site](https://kiali.io/docs/tutorials/travels/01-prerequisites/).  You should read more about the [Travels Demo App](https://kiali.io/docs/tutorials/travels/02-install-travel-demo/#understanding-the-demo-application) in order to better show your demo. 
 
 ### Troubleshooting
 
