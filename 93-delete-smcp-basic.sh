@@ -1,7 +1,8 @@
 #!/bin/bash 
 # Delete the mesh control plane infra
 
-oc delete smcp basic -n istio-system
+oc delete -f config/mesh/basic-mesh
+#oc delete smcp basic -n istio-system
 
 # Need to verify all pods have been removed 
 echo -n Verifying deletion of all control-plane pods ...
