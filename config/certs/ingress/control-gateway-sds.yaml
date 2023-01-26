@@ -8,7 +8,7 @@ spec:
     istio: ingressgateway
   servers:
   - hosts:
-#    - control.travel-control.FQDN
+#    - control.travel-control.example.com
     - '*'
     port:
       name: https
@@ -16,5 +16,4 @@ spec:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      privateKey: /etc/istio/ingressgateway-certs/tls.key
-      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+      credentialName: travel-control-credential
