@@ -1,6 +1,9 @@
 #!/bin/bash 
 # Add travels app into the mesh
 
+# Note that the following would also work:
+# oc label namespace travel-control travel-agency travel-portal istio-injection=enabled 
+
 # Script to add the auto-injection to all travel deployments 
 for ns in travel-control travel-agency travel-portal 
 do
