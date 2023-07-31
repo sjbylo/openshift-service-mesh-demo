@@ -1,0 +1,52 @@
+kind: AuthorizationPolicy
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: to-productpage
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: productpage
+  rules:
+    - from:
+        - source:
+            requestPrincipals:
+              - '*'
+  action: ALLOW
+---
+kind: AuthorizationPolicy
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: to-details
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  rules:
+    - from:
+        - source:
+            requestPrincipals:
+              - '*'
+  action: ALLOW
+---
+kind: AuthorizationPolicy
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: to-reviews
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: reviews
+  rules:
+    - from:
+        - source:
+            requestPrincipals:
+              - '*'
+  action: ALLOW
+---
+
+
+
+

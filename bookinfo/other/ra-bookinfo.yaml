@@ -1,0 +1,45 @@
+kind: RequestAuthentication
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: ra-bookinfo-productpage
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: productpage
+  jwtRules:
+    - forwardOriginalToken: true
+      issuer: testing@secure.istio.io
+      jwksUri: >-
+        https://raw.githubusercontent.com/istio/istio/release-1.17/security/tools/jwt/samples/jwks.json
+---
+kind: RequestAuthentication
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: ra-bookinfo-details
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: details
+  jwtRules:
+    - forwardOriginalToken: true
+      issuer: testing@secure.istio.io
+      jwksUri: >-
+        https://raw.githubusercontent.com/istio/istio/release-1.17/security/tools/jwt/samples/jwks.json
+---
+kind: RequestAuthentication
+apiVersion: security.istio.io/v1beta1
+metadata:
+  name: ra-bookinfo-reviews
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: reviews
+  jwtRules:
+    - forwardOriginalToken: true
+      issuer: testing@secure.istio.io
+      jwksUri: >-
+        https://raw.githubusercontent.com/istio/istio/release-1.17/security/tools/jwt/samples/jwks.json
+---
