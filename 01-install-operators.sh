@@ -20,13 +20,13 @@ echo " done"
 oc get csv -n openshift-operators | grep -e ^jaeger-operator -e  ^kiali-operator -e ^servicemeshoperator 
 
 # Note: Can't create SMCP resource (next step) if the operator is not fully ready
-echo -n Waiting for Istio Operator to become fully ready ...
-
-while ! oc logs `oc get po -n openshift-operators -oname -l name=istio-operator` -n openshift-operators | grep -qi "Correct CABundle already present" 
-do
-	echo -n .
-	sleep 2
-done
+### echo -n Waiting for Istio Operator to become fully ready ...
+### 
+### while ! oc logs `oc get po -n openshift-operators -oname -l name=istio-operator` -n openshift-operators | grep -qi "Correct CABundle already present" 
+### do
+###	echo -n .
+###	sleep 2
+###done
 
 echo " done"
 

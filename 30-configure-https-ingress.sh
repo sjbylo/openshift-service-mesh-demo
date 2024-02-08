@@ -10,8 +10,10 @@ mkdir -p tmp
 openssl req -x509 -config tmp/cert.cfg -extensions req_ext -nodes -days 730 -newkey rsa:2048 -sha256 -keyout tmp/tls.key -out tmp/tls.crt
 
 oc get secret istio-ingressgateway-certs -n istio-system && oc delete secret istio-ingressgateway-certs -n istio-system 
+sleep 1
 
 oc create secret tls istio-ingressgateway-certs --cert tmp/tls.crt --key tmp/tls.key -n istio-system
+sleep 1
 
 oc patch deployment istio-ingressgateway -p '{"spec":{"template":{"metadata":{"annotations":{"kubectl.kubernetes.io/restartedAt": "'`date +%FT%T%z`'"}}}}}' -n istio-system
 

@@ -15,7 +15,7 @@ do
 	sed "s#CLUSTER_DOMAIN#$DOM#g" $f | oc apply -f - 
 done
 
-echo Waiting for ingress route to be available ... 
+echo "Waiting for ingress route travel-control-control-gateway' to be available in 'istio-system' namespace ..."
 while ! oc get route -n istio-system | grep -q ^travel-control-control-gateway 
 do
 	echo -n .

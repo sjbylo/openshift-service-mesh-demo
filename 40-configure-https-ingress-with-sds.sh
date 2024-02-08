@@ -14,8 +14,9 @@ oc create -n istio-system secret tls travel-control-credential --key=tmp/tls.key
 
 #oc get secret istio-ingressgateway-certs -n istio-system && oc delete secret istio-ingressgateway-certs -n istio-system 
 #oc create secret tls istio-ingressgateway-certs --cert tls.crt --key tls.key -n istio-system
-#oc patch deployment istio-ingressgateway -p '{"spec":{"template":{"metadata":{"annotations":{"kubectl.kubernetes.io/restartedAt": "'`date +%FT%T%z`'"}}}}}' -n istio-system
 
 sed "s/example.com/$DOM/g" < control-gateway-sds.yaml | oc replace -f -
 
+sleep 3
+oc patch deployment istio-ingressgateway -p '{"spec":{"template":{"metadata":{"annotations":{"kubectl.kubernetes.io/restartedAt": "'`date +%FT%T%z`'"}}}}}' -n istio-system
 
