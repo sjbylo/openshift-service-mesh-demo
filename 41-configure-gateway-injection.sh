@@ -35,5 +35,6 @@ END
 sleep 8
 
 h=$(oc get route travel-control -o json | jq -r .spec.host)
-curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available at 'https://$h/'"
+curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available at 'https://$h/'" && exit
+echo "Can't reach app at https://$h/"
 

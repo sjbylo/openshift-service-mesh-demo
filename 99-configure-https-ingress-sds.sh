@@ -5,7 +5,7 @@
 cd config/certs/ingress 
 mkdir -p tmp
 
-#sed "s/example.com/$DOM/g" < cert.cfg > tmp/cert.cfg
+sed "s/example.com/$DOM/g" < cert.cfg > tmp/cert.cfg
 
 openssl req -x509 -config tmp/cert.cfg -extensions req_ext -nodes -days 730 -newkey rsa:2048 -sha256 -keyout tmp/tls.key -out tmp/tls.crt
 
