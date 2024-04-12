@@ -8,6 +8,10 @@
 # This sets up the gw obj needed for https with a secret (cert) 
 ./40-configure-https-ingress-with-sds.sh
 
+# Quick fix for now! Copy over the secret!
+oc delete secrets travel-control-credential 
+oc get secrets travel-control-credential -n istio-system -o yaml| sed "s/namespace:.*/namespace: travel-control/g" | oc create -f - 
+
 
 # This deploys an Envoy ingress pod in the travel-control ns (gw better NOT in istio-system ns) 
 oc apply -f config/certs/ingress/gateway-injection.yaml
@@ -35,6 +39,6 @@ END
 sleep 8
 
 h=$(oc get route travel-control -o json | jq -r .spec.host)
-curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available at 'https://$h/'" && exit
+curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
 echo "Can't reach app at https://$h/"
 

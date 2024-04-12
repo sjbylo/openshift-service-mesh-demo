@@ -25,5 +25,7 @@ done
 # Now use the route in the istio-system namespace with a "." (the initial non-mesh-route had a "-") 
 oc delete route control -n travel-control 2>/dev/null
 
+sleep 8 
+
 bin/check-app-working.sh
 

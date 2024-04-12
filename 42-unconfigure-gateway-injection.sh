@@ -6,3 +6,4 @@ oc delete -f config/certs/ingress/gateway-injection.yaml
 oc delete route travel-control
 
 ./06-add-gw-vs-dr.sh
+

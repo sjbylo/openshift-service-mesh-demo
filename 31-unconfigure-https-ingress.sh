@@ -6,3 +6,6 @@ oc patch deployment istio-ingressgateway -p '{"spec":{"template":{"metadata":{"a
 
 oc apply -f config/mesh/mesh-resources/control-gateway.yaml
 
+sleep 3
+
+bin/check-app-working.sh
