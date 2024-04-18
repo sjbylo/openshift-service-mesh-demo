@@ -1,0 +1,22 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  creationTimestamp: "2024-04-12T07:56:28Z"
+  generation: 10
+  name: control-gateway
+  namespace: travel-control
+  resourceVersion: "604927"
+  uid: 1d8f7e65-b493-45ad-8216-8fc4f3d89bbc
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      credentialName: travel-control-credential
+      mode: SIMPLE

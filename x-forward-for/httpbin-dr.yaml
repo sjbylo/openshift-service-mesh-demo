@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: httpbin
+  namespace: httpbin-demo
+spec:
+  host: httpbin.httpbin-demo.svc.cluster.local
+  subsets:
+  - labels:
+      version: v1
+    name: v1

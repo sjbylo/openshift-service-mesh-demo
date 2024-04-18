@@ -1,0 +1,16 @@
+[ req ]
+req_extensions     = req_ext
+distinguished_name = req_distinguished_name
+prompt             = no
+
+[req_distinguished_name] 
+commonName=istio-ingressgateway.httpbin-demo.svc
+
+
+[req_ext]
+subjectAltName   = @alt_names        
+
+[alt_names]
+DNS.1  = istio-ingressgateway.httpbin-demo.svc
+DNS.2  = istio-ingressgateway.httpbin-demo
+

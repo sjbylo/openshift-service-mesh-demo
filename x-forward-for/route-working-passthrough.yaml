@@ -1,0 +1,31 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2024-04-13T09:47:23Z"
+  name: httpbin
+  namespace: travel-control
+  resourceVersion: "652421"
+  uid: 3fc644ed-b6c1-4b5d-8c8c-366c8dd16250
+spec:
+  host: httpbin-travel-control.apps.compact2.example.com
+  port:
+    targetPort: https
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2024-04-13T09:47:23Z"
+      status: "True"
+      type: Admitted
+    host: httpbin-travel-control.apps.compact2.example.com
+    routerCanonicalHostname: router-default.apps.compact2.example.com
+    routerName: default
+    wildcardPolicy: None

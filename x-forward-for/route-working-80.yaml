@@ -1,0 +1,34 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"route.openshift.io/v1","kind":"Route","metadata":{"annotations":{},"name":"httpbin","namespace":"httpbin-demo"},"spec":{"port":{"targetPort":"https"},"tls":{"termination":"reencrypt"},"to":{"kind":"Service","name":"istio-ingressgateway","weight":100},"wildcardPolicy":"None"}}
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2024-04-12T09:41:16Z"
+  name: httpbin
+  namespace: httpbin-demo
+  resourceVersion: "198700"
+  uid: 42cb6744-6cf2-4cfa-98d3-4d119fdf29af
+spec:
+  host: httpbin-httpbin-demo.apps.compact2.example.com
+  port:
+    targetPort: http2
+  tls:
+    insecureEdgeTerminationPolicy: None
+    termination: edge
+  to:
+    kind: Service
+    name: istio-ingressgateway
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2024-04-12T09:41:16Z"
+      status: "True"
+      type: Admitted
+    host: httpbin-httpbin-demo.apps.compact2.example.com
+    routerCanonicalHostname: router-default.apps.compact2.example.com
+    routerName: default
+    wildcardPolicy: None

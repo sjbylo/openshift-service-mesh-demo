@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  creationTimestamp: "2024-04-12T09:36:53Z"
+  generation: 2
+  name: httpbin-gateway
+  namespace: httpbin-demo
+  resourceVersion: "196675"
+  uid: 95599c4a-df55-45cb-a6c9-75dba925464c
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - hosts:
+    - '*'
+    port:
+      name: http
+      number: 80
+      protocol: HTTP
