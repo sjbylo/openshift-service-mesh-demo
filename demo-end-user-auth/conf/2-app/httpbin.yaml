@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    app: httpbin
+  name: httpbin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment: httpbin
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+        sidecar.istio.io/inject: "true"
+      labels:
+        deployment: httpbin
+        app: httpbin
+    spec:
+      containers:
+      - image: quay.io/sjbylo/httpbin:latest
+        imagePullPolicy: Always
+        name: httpbin
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+  labels:
+    app: httpbin
+  name: httpbin
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deployment: httpbin

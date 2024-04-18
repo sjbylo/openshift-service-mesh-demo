@@ -1,0 +1,20 @@
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: httpbin-from-sleep
+  namespace: foo
+spec:
+  hosts:
+    - httpbin
+  http:
+    - match:
+        - sourceLabels:
+            app: sleep
+      route:
+        - destination:
+            host: httpbin.foo.svc.cluster.local
+          weight: 100
+    - route:
+      - destination:
+          host: vote-app.foo.svc.cluster.local
+        weight: 100

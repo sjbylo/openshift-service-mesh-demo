@@ -1,0 +1,17 @@
+# This GW is just for convenience, to easily access the httpbin pod
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: httpbin-gateway
+  namespace: foo
+spec:
+  selector:
+    istio: ingressgateway         # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+
