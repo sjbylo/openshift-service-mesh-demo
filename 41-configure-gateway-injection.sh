@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Note that '90-delete-gw-vs-dr.sh' can bes used to reset this config
+# Note that '90-delete-gw-vs-dr.sh' can be used to reset this config
 
 # Be sure this has been executed ok
 ./06-add-gw-vs-dr.sh
@@ -36,9 +36,16 @@ spec:
   wildcardPolicy: None
 END
 
-sleep 8
+echo "First run: it will take ~1 min to be working (if error, run again)..."
+sleep 16
 
 h=$(oc get route travel-control -o json | jq -r .spec.host)
+while [ ! "$h" ]
+do
+	sleep 10
+	h=$(oc get route travel-control -o json | jq -r .spec.host)
+done
+
 curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
 echo "Can't reach app at https://$h/"
 

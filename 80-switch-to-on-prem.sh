@@ -1,4 +1,5 @@
 #!/bin/bash -ex
+# This script will switch the registry for testing only
 
 # Fix the sources
 sed -i "s/source: .*/source: cs-redhat-operator-index/g" operators/*
