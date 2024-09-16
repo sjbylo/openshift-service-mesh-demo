@@ -7,6 +7,10 @@
 # Double check no SMCP basic resource
 oc get smcp basic -n istio-system 2>/dev/null && echo "Remove the Service Mesh Control Plane (SMCP) Custom Resource first" && exit 1
 
+#oc delete subs kiali-ossm -n openshift-operators
+#oc delete subs jaeger-product -n openshift-operators
+#oc delete subs servicemeshoperator -n openshift-operators
+
 # Delete the operators 
 for sub in jaeger-product kiali-ossm servicemeshoperator
 do

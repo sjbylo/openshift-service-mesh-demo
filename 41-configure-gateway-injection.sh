@@ -37,7 +37,7 @@ spec:
 END
 
 echo "First run: it will take ~1 min to be working (if error, run again)..."
-sleep 16
+sleep 10
 
 h=$(oc get route travel-control -o json | jq -r .spec.host)
 while [ ! "$h" ]
@@ -46,6 +46,10 @@ do
 	h=$(oc get route travel-control -o json | jq -r .spec.host)
 done
 
-curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
-echo "Can't reach app at https://$h/"
+until curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
+do
+	echo "Can't reach app at https://$h/"
+	sleep 10
+done
+
 
