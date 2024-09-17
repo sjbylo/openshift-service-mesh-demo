@@ -7,15 +7,12 @@
 # Double check no SMCP basic resource
 oc get smcp basic -n istio-system 2>/dev/null && echo "Remove the Service Mesh Control Plane (SMCP) Custom Resource first" && exit 1
 
-#oc delete subs kiali-ossm -n openshift-operators
-#oc delete subs jaeger-product -n openshift-operators
-#oc delete subs servicemeshoperator -n openshift-operators
-
 # Delete the operators 
 for sub in jaeger-product kiali-ossm servicemeshoperator
 do
-	CSV=`oc get subscription $sub -n openshift-operators -o json | jq -r .status.currentCSV`	
-	oc delete subscription $sub -n openshift-operators
+	# Note that if ACM is installed there can be a conflict between "subcriptions" and "subs" which are different APIs!
+	CSV=`oc get subs $sub -n openshift-operators -o json | jq -r .status.currentCSV`	
+	oc delete subs $sub -n openshift-operators
 	oc delete csv $CSV -n openshift-operators
 done
 
