@@ -1,25 +1,30 @@
 #!/bin/bash 
 # Problem: this script will show the Kiali route below even if the app is not in the mesh (no GW, VS etc)
 
-APP_URL=`oc get route control -n travel-control -o json 2>/dev/null | jq -r .status.ingress[0].host`
-
 echo -n "Use this URL to access the demo app "
 
+APP_URL=`oc get route control -n travel-control -o json 2>/dev/null | jq -r .status.ingress[0].host`
 if [ "$APP_URL" ]; then
 	echo 
 	echo "http://$APP_URL/"
 	curl -L $APP_URL 2>/dev/null | grep -q "Travel Control Dashboard" && echo "Demo app is working!" || echo "Demo app is not working!"
 else
-	# Fetch the mesh ingress route
-	APP_URL=`oc get route -n istio-system | grep ^travel-control-control-gateway | awk '{print $2}'`
-
+	APP_URL=`oc get route travel-control -n travel-control -o json 2>/dev/null | jq -r .status.ingress[0].host`
 	if [ "$APP_URL" ]; then
-		echo via the mesh ingress gateway
-		echo http://$APP_URL
-		curl -L $APP_URL 2>/dev/null | grep -q "Travel Control Dashboard" && echo "Demo app is working!" || echo "Demo app is not working!"
+		echo via the injected gateway
+		echo "https://$APP_URL/"
+		curl -kL https://$APP_URL 2>/dev/null | grep -q "Travel Control Dashboard" && echo "Demo app is working!" || echo "Demo app is not working!"
 	else
-		echo 
-		echo "No route available"
+		# Fetch the mesh ingress route
+		APP_URL=`oc get route -n istio-system | grep ^travel-control-control-gateway | awk '{print $2}'`
+		if [ "$APP_URL" ]; then
+			echo via the mesh ingress gateway
+			echo http://$APP_URL
+			curl -L $APP_URL 2>/dev/null | grep -q "Travel Control Dashboard" && echo "Demo app is working!" || echo "Demo app is not working!"
+		else
+			echo 
+			echo "No route available"
+		fi
 	fi
 fi
 

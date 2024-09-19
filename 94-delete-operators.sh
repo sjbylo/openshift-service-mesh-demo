@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash 
 # Remove the mesh operators
 
 # For how to properly remove operators, see:
