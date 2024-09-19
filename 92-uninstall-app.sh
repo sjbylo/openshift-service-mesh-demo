@@ -1,7 +1,10 @@
+#!/bin/bash
 # This will remove the travels app.  
 
 oc delete -f config/travels-app-injected
 oc delete -f config/travels-app-extension
+
+oc delete project travel-agency travel-control travel-portal
 
 # The manifests come from this great demo
 #oc delete -f https://raw.githubusercontent.com/kiali/demos/master/travels/travel_control.yaml -n travel-control
