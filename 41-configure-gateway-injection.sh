@@ -10,6 +10,7 @@
 
 # Quick fix for now! Copy over the secret!
 oc delete secrets travel-control-credential 
+sleep 1
 oc get secrets travel-control-credential -n istio-system -o yaml| sed "s/namespace:.*/namespace: travel-control/g" | oc create -f - 
 
 
