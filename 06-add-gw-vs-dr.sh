@@ -12,7 +12,7 @@ echo
 # Adjust the 'hosts' value and apply the manifests 
 for f in config/mesh/mesh-resources/control-*
 do
-	sed "s#CLUSTER_DOMAIN#$DOM#g" $f | oc apply -f - 
+	sed "s#CLUSTER_DOMAIN#$DOM#g" $f | oc apply -n travel-control -f - 
 done
 
 echo "Waiting for ingress route travel-control-control-gateway' to be available in 'istio-system' namespace ..."

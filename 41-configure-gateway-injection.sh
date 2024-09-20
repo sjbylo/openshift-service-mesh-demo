@@ -9,13 +9,13 @@
 ./40-configure-https-ingress-with-sds.sh
 
 # Quick fix for now! Copy over the secret!
-oc delete secrets travel-control-credential 
+oc delete secrets travel-control-credential -n travel-control
 sleep 1
-oc get secrets travel-control-credential -n istio-system -o yaml| sed "s/namespace:.*/namespace: travel-control/g" | oc create -f - 
+oc get secrets travel-control-credential -n istio-system -o yaml| sed "s/namespace:.*/namespace: travel-control/g" | oc create -n travel-control -f - 
 
 
 # This deploys an Envoy ingress pod in the travel-control ns (gw better NOT in istio-system ns) 
-oc apply -f config/certs/ingress/gateway-injection.yaml
+oc apply -f config/certs/ingress/gateway-injection.yaml -n travel-control 
 
 
 # This is the 'passthrough" route that's needed, basically the same at the route in istio-system ns
@@ -40,11 +40,11 @@ END
 echo "First run: it will take ~1 min to be working (if error, run again)..."
 sleep 10
 
-h=$(oc get route travel-control -o json | jq -r .spec.host)
+h=$(oc get route travel-control -o json -n travel-control | jq -r .spec.host)
 while [ ! "$h" ]
 do
 	sleep 10
-	h=$(oc get route travel-control -o json | jq -r .spec.host)
+	h=$(oc get route travel-control -o json -n travel-control | jq -r .spec.host)
 done
 
 until curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
