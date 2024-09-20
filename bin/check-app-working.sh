@@ -1,6 +1,8 @@
 #!/bin/bash 
 # Problem: this script will show the Kiali route below even if the app is not in the mesh (no GW, VS etc)
 
+. bin/include.sh
+
 K=`oc get route kiali -n istio-system -o json | jq -r ".spec.host"`
 
 if [ "$K" ]; then
@@ -22,7 +24,7 @@ if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the injected gateway in namespace travel-control
 		echo "https://$APP_URL/"
-		echo "Demo app is working!"
+		echo_green "Demo app is working!"
 
 		exit 0
 	fi
@@ -33,7 +35,7 @@ if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the control route in namespace travel-control
 		echo "http://$APP_URL/"
-		echo "Demo app is working!"
+		echo_green "Demo app is working!"
 
 		exit 0
 	fi
@@ -45,7 +47,7 @@ if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the mesh ingress gateway
 		echo http://$APP_URL
-		echo "Demo app is working!"
+		echo_green "Demo app is working!"
 
 		exit 0
 	fi
@@ -53,12 +55,12 @@ if [ "$APP_URL" ]; then
 	if curl -s -L $APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the mesh ingress gateway
 		echo http://$APP_URL
-		echo "Demo app is working!"
+		echo_green "Demo app is working!"
 
 		exit 0
 	fi
 fi
 
 echo
-echo "No route available!"
+echo_red "No route available!"
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. bin/include.sh
+
 # Note that '90-delete-gw-vs-dr.sh' can be used to reset this config
 
 # Be sure this has been executed ok
@@ -47,9 +49,9 @@ do
 	h=$(oc get route travel-control -o json -n travel-control | jq -r .spec.host)
 done
 
-until curl -sk https://$h/ | grep "Travel Control" && echo && echo "App available via the injected GW at 'https://$h/'" && exit
+until curl -sk https://$h/ | grep "Travel Control" && echo && echo_green "App available via the injected GW at 'https://$h/'" && exit
 do
-	echo "Can't reach app at https://$h/"
+	echo_red "Can't reach app at https://$h/"
 	sleep 10
 done
 

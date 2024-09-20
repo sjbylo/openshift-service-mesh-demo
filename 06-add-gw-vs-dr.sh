@@ -15,12 +15,13 @@ do
 	sed "s#CLUSTER_DOMAIN#$DOM#g" $f | oc apply -n travel-control -f - 
 done
 
-echo "Waiting for ingress route travel-control-control-gateway' to be available in 'istio-system' namespace ..."
-while ! oc get route -n istio-system | grep -q ^travel-control-control-gateway 
-do
-	echo -n .
-	sleep 1
-done
+# FIXME: Strange, when we change the ns name from "istio - system" to seomthing else, ropute aut-gen fails.
+#echo "Waiting for ingress route travel-control-control-gateway' to be available in 'istio-system' namespace ..."
+#while ! oc get route -n istio-system | grep -q ^travel-control-control-gateway 
+#do
+#	echo -n .
+#	sleep 1
+#done
 
 # Now use the route in the istio-system namespace with a "." (the initial non-mesh-route had a "-") 
 oc delete route control -n travel-control 2>/dev/null
