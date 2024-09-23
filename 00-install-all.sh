@@ -1,5 +1,9 @@
 #!/bin/bash 
 
+# Note: use this to change the name of the istio system ns
+#sed -i "s/istio-system/istio-system/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
+
+
 echo Executing the following commands:
 
 execscripts=./0[1-9]*sh

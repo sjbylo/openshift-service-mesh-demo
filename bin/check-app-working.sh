@@ -13,7 +13,7 @@ if [ "$K" ]; then
 	echo "https://$K/"
 	echo
 	echo Wait a few minutes and go directly to the demo graph with animation settings turned on:
-	echo "https://$K/console/graph/namespaces/?traffic=grpc%2CgrpcRequest%2Chttp%2ChttpRequest%2Ctcp%2CtcpSent&graphType=versionedApp&namespaces=travel-agency%2Ctravel-control%2Ctravel-portal&duration=60&refresh=10000&layout=dagre&namespaceLayout=kiali-dagre&animation=true&injectServiceNodes=false&graphFind=rt+%3E+1000&edges=responseTime%2Crt95"
+	echo_cyan "https://$K/console/graph/namespaces/?traffic=grpc%2CgrpcRequest%2Chttp%2ChttpRequest%2Ctcp%2CtcpSent&graphType=versionedApp&namespaces=travel-agency%2Ctravel-control%2Ctravel-portal&duration=60&refresh=10000&layout=dagre&namespaceLayout=kiali-dagre&animation=true&injectServiceNodes=false&graphFind=rt+%3E+1000&edges=responseTime%2Crt95"
 fi
 
 echo
@@ -23,7 +23,7 @@ APP_URL=`oc get route travel-control -n travel-control -o json 2>/dev/null | jq 
 if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the injected gateway in namespace travel-control
-		echo "https://$APP_URL/"
+		echo_cyan "https://$APP_URL/"
 		echo_green "Demo app is working!"
 
 		exit 0
@@ -34,7 +34,7 @@ APP_URL=`oc get route control -n travel-control -o json 2>/dev/null | jq -r .sta
 if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the control route in namespace travel-control
-		echo "http://$APP_URL/"
+		echo_cyan "http://$APP_URL/"
 		echo_green "Demo app is working!"
 
 		exit 0
@@ -46,7 +46,7 @@ APP_URL=`oc get route -n istio-system | grep ^travel-control-control-gateway | a
 if [ "$APP_URL" ]; then
 	if curl -s -kL https://$APP_URL | grep -q "Travel Control Dashboard"; then
 		echo via the mesh ingress gateway
-		echo http://$APP_URL
+		echo_cyan http://$APP_URL
 		echo_green "Demo app is working!"
 
 		exit 0
