@@ -1,6 +1,8 @@
 #!/bin/bash 
 # Create the Service Mesh Control Plane (SMCP) resource to instatiate the mesh CP resources
 
+. bin/include.sh
+
 oc apply -f config/mesh/basic-mesh
 #[ $? -ne 0 ] && echo Waiting for webhook to become available ... && \
 #   while ! oc apply -f config/mesh/basic-mesh 2>/dev/null; do echo -n .; sleep 1; done  # This is due to the error "Internal error occurred: failed calling webhook"
@@ -21,8 +23,7 @@ oc get smcp basic -n istio-system
 
 # Wait for route/kiali to be created
 echo -n "Waiting for route/kiali ..."
-#while ! oc get route kiali -n istio-system 2>/dev/null | grep -q ^kiali; do echo -n .; sleep 1; done
-try_cmd 10 1 400 "oc get route kiali -n istio-system 2>/dev/null"
+try_cmd -q 1 1 120 "oc get route kiali -n istio-system 2>/dev/null"
 
 echo " done"
 

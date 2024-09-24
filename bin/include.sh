@@ -23,6 +23,7 @@ try_cmd() {
 
 	while ! eval $*
 	do
+		echo -n .
 		if [ ! "$quiet" ]; then
 			[ $count -ge $total ] && echo "Giving up!" && return 1
 			echo Pausing $pause seconds ...
