@@ -1,9 +1,10 @@
 #!/bin/bash 
 
 # Note: use this to change the name of the istio system ns
-#sed -i "s/istio-system/istio-system-basic/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
-#sed -i "s/istio-system-basic/istio-system/g" `find * -type f -exec grep -l "\bistio-system-basic\b" {} \;`
+#sed -i "s/istio-system/istio-system/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
+#sed -i "s/istio-system/istio-system/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
 
+export ISTIO_NAMESPACE=istio-system
 
 echo Executing the following commands:
 

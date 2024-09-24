@@ -8,7 +8,7 @@ oc apply -f config/mesh/basic-mesh
 echo This can take some time to complete.
 echo -n Verifying installation ...
 
-oc wait -n istio-system --for=condition=ready smcp basic --timeout=300s
+oc wait -n istio-system --for=condition=ready smcp basic --timeout=400s
 
 #while ! oc get smcp basic -n istio-system | grep -qi ComponentsReady
 #do
@@ -21,7 +21,9 @@ oc get smcp basic -n istio-system
 
 # Wait for route/kiali to be created
 echo -n "Waiting for route/kiali ..."
-while ! oc get route kiali -n istio-system 2>/dev/null | grep -q ^kiali; do echo -n .; sleep 1; done
+#while ! oc get route kiali -n istio-system 2>/dev/null | grep -q ^kiali; do echo -n .; sleep 1; done
+try_cmd 10 1 400 "oc get route kiali -n istio-system 2>/dev/null"
+
 echo " done"
 
 echo
