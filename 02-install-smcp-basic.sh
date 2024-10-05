@@ -23,7 +23,7 @@ oc get smcp basic -n istio-system
 
 # Wait for route/kiali to be created
 echo -n "Waiting for route/kiali ..."
-try_cmd -q 1 1 120 "oc get route kiali -n istio-system 2>/dev/null"
+try_cmd 2 1 60 "oc get route kiali -n istio-system 2>/dev/null" || exit 1
 
 echo " done"
 
