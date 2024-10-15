@@ -14,6 +14,9 @@ if [ "$K" ]; then
 	echo
 	echo Wait a few minutes and go directly to the demo graph with animation settings turned on:
 	echo_cyan "https://$K/console/graph/namespaces/?traffic=grpc%2CgrpcRequest%2Chttp%2ChttpRequest%2Ctcp%2CtcpSent&graphType=versionedApp&namespaces=travel-agency%2Ctravel-control%2Ctravel-portal&duration=60&refresh=10000&layout=dagre&namespaceLayout=kiali-dagre&animation=true&injectServiceNodes=false&graphFind=rt+%3E+1000&edges=responseTime%2Crt95"
+	echo
+	echo Newer version:
+	echo_cyan "https://$K/console/graph/namespaces/?traffic=grpc%2CgrpcRequest%2Chttp%2ChttpRequest%2Ctcp%2CtcpSent&graphType=versionedApp&namespaces=travel-agency%2Ctravel-control%2Ctravel-portal&duration=60&refresh=10000&layout=kiali-dagre&namespaceLayout=kiali-dagre&animation=true&graphFind=rt+%3E+1000&edges=responseTime%2Crt95&injectServiceNodes=false"
 fi
 
 echo
