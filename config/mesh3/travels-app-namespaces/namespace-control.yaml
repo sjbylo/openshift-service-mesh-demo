@@ -4,3 +4,4 @@ metadata:
   name: travel-control
   labels:
     istio-injection: enabled
+    istio-discovery: enabled

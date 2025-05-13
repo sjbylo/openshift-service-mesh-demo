@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: istio-system
 ---
-apiVersion: sailoperator.io/v1alpha1
+apiVersion: sailoperator.io/v1
 kind: Istio
 metadata:
   name: default
@@ -12,7 +12,7 @@ spec:
   updateStrategy:
     type: InPlace
     inactiveRevisionDeletionGracePeriodSeconds: 30
-  version: v1.23.0
+  version: v1.24.4
 ---
 apiVersion: v1
 kind: Namespace
@@ -20,9 +20,9 @@ metadata:
   name: istio-cni
 ---
 kind: IstioCNI
-apiVersion: sailoperator.io/v1alpha1
+apiVersion: sailoperator.io/v1
 metadata:
   name: default
 spec:
   namespace: istio-cni
-  version: v1.23.0
+  version: v1.24.4

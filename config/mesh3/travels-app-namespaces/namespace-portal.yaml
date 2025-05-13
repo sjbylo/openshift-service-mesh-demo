@@ -4,3 +4,4 @@ metadata:
   name: travel-portal
   labels:
     istio-injection: enabled
+    istio-discovery: enabled
