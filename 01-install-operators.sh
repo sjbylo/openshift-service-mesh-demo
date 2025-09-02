@@ -9,8 +9,8 @@ oc apply -f operators
 echo This can take some time to complete.
 echo -n Verifying Operator installation ...
 
-#while [ `oc get csv -n openshift-operators 2>/dev/null | grep -e "^jaeger-operator\." -e  "^kiali-operator\." -e "^servicemeshoperator\." | grep "\bSucceeded\b" | wc -l` -ne 3 ]
-while [ `oc get csv -n openshift-operators 2>/dev/null | grep -e "^kiali-operator\." -e "^servicemeshoperator\." | grep "\bSucceeded\b" | wc -l` -ne 2 ]
+while [ `oc get csv -n openshift-operators 2>/dev/null | grep -e "^jaeger-operator\." -e  "^kiali-operator\." -e "^servicemeshoperator\." | grep "\bSucceeded\b" | wc -l` -ne 3 ]
+#while [ `oc get csv -n openshift-operators 2>/dev/null | grep -e "^kiali-operator\." -e "^servicemeshoperator\." | grep "\bSucceeded\b" | wc -l` -ne 2 ]
 do
 	echo -n . 
 	sleep 1
