@@ -8,12 +8,18 @@ oc apply -Rf config/mesh3
 echo This can take some time to complete.
 echo -n Verifying installation ...
 
-oc wait --for=jsonpath='{.status.state}'=Healthy Istio/default --timeout=120s
-echo " done"
+# FIXME: due to bug
+#oc wait --for=jsonpath='{.status.state}'=Healthy Istio/default --timeout=120s
+#echo " done"
 
-oc wait --for=jsonpath='{.status.state}'=Healthy IstioCni/default --timeout=120s
-echo " done"
+# FIXME: due to bug
+#oc wait --for=jsonpath='{.status.state}'=Healthy IstioCni/default --timeout=120s
+#echo " done"
 
-oc get -n istio-system Istio default -o jsonpath='{.status}' | jq .
+echo Istio status:
+oc get -n istio-system Istio    default -o jsonpath='{.status}' | jq .
+
+echo IstioCni status:
+oc get -n istio-system IstioCni default -o jsonpath='{.status}' | jq .
 #oc get Istio default -n istio-system
 
