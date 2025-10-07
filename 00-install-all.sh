@@ -1,9 +1,13 @@
-#!/bin/bash 
+#!/bin/bash -e
 
 # Note: use this to change the name of the istio system ns
 #sed -i "s/istio-system/istio-system/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
 
 echo Executing the following commands:
+
+echo =====================================
+echo WARNING: ONLY WORKS on a 4.18 cluster 
+echo =====================================
 
 execscripts="\
 ./01-install-operators.sh

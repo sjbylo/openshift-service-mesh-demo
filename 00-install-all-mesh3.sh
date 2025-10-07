@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -e
 
 # Note: use this to change the name of the istio system ns
 #sed -i "s/istio-system/istio-system/g" `find * -type f -exec grep -l "\bistio-system\b" {} \;`
