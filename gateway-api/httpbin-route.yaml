@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: httpbin-route
+  namespace: httpbin
+spec:
+  host: httpbin.apps.cluster-zmmqv.zmmqv.sandbox634.opentlc.com
+  port:
+    targetPort: default
+  to:
+    kind: Service
+    name: httpbin-gateway-istio
+    weight: 100
+  wildcardPolicy: None
