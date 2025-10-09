@@ -33,7 +33,9 @@ oc apply -n curl -f https://raw.githubusercontent.com/openshift-service-mesh/ist
 
 sleep 1
 
-CURL_POD=$(oc get pods -n curl -l app=curl -o jsonpath='{.items[*].metadata.name}')
+until CURL_POD=$(oc get pods -n curl -l app=curl -o jsonpath='{.items[*].metadata.name}'); do sleep 5; done
+
+echo Found curl pod: $CURL_POD
 
 curl_pod_check() {
 	oc exec $CURL_POD -n curl -- \
@@ -42,7 +44,7 @@ curl_pod_check() {
 		httpbin-gateway-istio.httpbin.svc.cluster.local/headers
 }
 
-curl_pod_check
+curl_pod_check 
 ! curl_pod_check | grep -q "200 OK" && echo_red "ERROR: Expecting '200 OK' responce" && exit 1
 
 oc patch service httpbin-gateway-istio -n httpbin -p '{"spec": {"type": "LoadBalancer"}}'
@@ -61,11 +63,16 @@ echo_green "Call: curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$ING
 echo_green "(This only works if 'LoadBalancer' type services are working in your cluster!)"
 echo
 
+# These are beeded for installing curl but not for tests
+unset http_proxy https_proxy no_proxy
+unset HTTP_PROXY HTTPS_PROXY NO_PROXY
+
 curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers
 ! curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers | grep -q "200 OK" && echo_red "ERROR: Expecting '200 OK' responce" && exit 1
 
 echo_green Creating route 
 cat httpbin-route.yaml | sed "s/host: .*/host: httpbin.$APPS_DOM/g" | oc apply -f -
+sleep 1
 echo_green "Running: curl -s -I http://httpbin.$APPS_DOM/headers"
 curl -s -I http://httpbin.$APPS_DOM/headers 
 ! curl -s -I http://httpbin.$APPS_DOM/headers | grep -q "200 OK" && echo_red "ERROR: Expecting '200 OK' responce" && exit 1
