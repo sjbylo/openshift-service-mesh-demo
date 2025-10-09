@@ -54,10 +54,9 @@ echo_green Test with external LB
 export INGRESS_HOST=$(oc get gtw httpbin-gateway -n httpbin -o jsonpath='{.status.addresses[0].value}')
 INGRESS_PORT=$(oc get gtw httpbin-gateway -n httpbin -o jsonpath='{.spec.listeners[?(@.name=="http")].port}')
 
-echo_green "Waiting for endpoint to be reachable: http://$INGRESS_HOST:$INGRESS_PORT ..."
-until curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers; do sleep 5; done
+echo_green "Waiting for endpoint to become available: http://$INGRESS_HOST:$INGRESS_PORT ..."
+until curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers; do sleep 5; echo -n .; done
 
-echo
 echo_green "Call: curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers"
 echo_green "(This only works if 'LoadBalancer' type services are working in your cluster!)"
 echo
@@ -65,7 +64,6 @@ echo
 curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers
 ! curl -s -I -H Host:httpbin.$APPS_DOM http://$INGRESS_HOST:$INGRESS_PORT/headers | grep -q "200 OK" && echo_red "ERROR: Expecting '200 OK' responce" && exit 1
 
-echo
 echo_green Creating route 
 cat httpbin-route.yaml | sed "s/host: .*/host: httpbin.$APPS_DOM/g" | oc apply -f -
 echo_green "Running: curl -s -I http://httpbin.$APPS_DOM/headers"
@@ -77,5 +75,6 @@ sleep 1
 echo_green SUCCESS!
 echo_green Route: http://httpbin.$APPS_DOM/headers
 echo_green LB: httpbin.$APPS_DOM via http://$INGRESS_HOST:$INGRESS_PORT/headers
+oc get po -n httpbin
 
 
