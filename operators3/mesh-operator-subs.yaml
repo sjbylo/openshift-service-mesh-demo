@@ -9,7 +9,7 @@ spec:
   name: servicemeshoperator3
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: servicemeshoperator3.v3.1.1
+    #  startingCSV: servicemeshoperator3.v3.1.1
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -22,4 +22,4 @@ spec:
   name: kiali-ossm
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: kiali-operator.v2.11.2
+    #  startingCSV: kiali-operator.v2.11.2

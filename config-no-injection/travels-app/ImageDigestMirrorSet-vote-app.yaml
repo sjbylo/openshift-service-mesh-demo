@@ -1,0 +1,9 @@
+apiVersion: config.openshift.io/v1
+kind: ImageDigestMirrorSet
+metadata:
+  name: idms-generic-0-vote-app
+spec:
+  imageDigestMirrors:
+  - mirrors:
+    - mirror.example.com:8443/ocp4/openshift4/sjbylo
+    source: quay.io/sjbylo
